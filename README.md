@@ -1,1 +1,1 @@
-# my-silly-leetcode
+# My silly algorithm training
