@@ -24,21 +24,40 @@ fun solve(s1: String, s2: String): Boolean {
         return false
     }
     val checker = HashMap<Char, Int>()
-    s1.forEach {
-        if (checker[it] == null) {
-            checker[it] = 1
+    for (i in s1.indices) {
+        if (checker[s1[i]] == null) {
+            checker[s1[i]] = 1
         } else {
-            checker[it] = checker[it]!! + 1
+            checker[s1[i]] = checker[s1[i]]!! + 1
         }
     }
-    println(checker)
+
     for (i in s2.indices) {
         if (checker[s2[i]] != null) {
             checker[s2[i]] = checker[s2[i]]!! - 1
         }
     }
 
-    println(checker)
-
     return checker.values.all { it == 0 }
+}
+
+fun solve2(s1: String, s2: String): Boolean {
+    if (s1.length != s2.length) {
+        return false
+    }
+
+    // 25 chars a-z
+    val checker = IntArray(25)
+
+    s1.forEach {
+        val index = it - 'a'
+        checker[index] += 1
+    }
+
+    s2.forEach {
+        val index = it - 'a'
+        checker[index] -= 1
+    }
+
+    return checker.all { it == 0 }
 }
